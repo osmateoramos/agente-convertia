@@ -1,0 +1,48 @@
+{
+  "_instrucciones": "nombre_reporte es el nombre EXACTO en la columna 'Nombre' al buscarlo en Reportes de cada sitio (no la Descripcion). Ojo: el mismo reporte puede tener nombres distintos segun el sitio (p.ej. 'ConvertiaVentasBrutasCall' en marketing.convertia.com vs 'ReportConvertiaVentasBrutasCall' en convertia.infunnel.inconcert.cloud).",
+  "sitios": {
+    "principal": "https://marketing.convertia.com",
+    "claro": "https://convertia.infunnel.inconcert.cloud"
+  },
+  "cuentas": {
+    "wowperu": {
+      "sitio": "principal",
+      "reportes": [
+        { "alias": "brutas", "nombre_reporte": "ConvertiaVentasBrutasCall" },
+        { "alias": "gestionventas", "nombre_reporte": "ReportDetalleGestionVentas" }
+      ]
+    },
+    "wowperu_in_out": {
+      "sitio": "principal",
+      "reportes": [
+        { "alias": "gestionventas", "nombre_reporte": "ReportDetalleGestionVentas" }
+      ]
+    },
+    "wowperu_out": {
+      "sitio": "principal",
+      "reportes": [
+        { "alias": "gestionventas", "nombre_reporte": "ReportDetalleGestionVentas" }
+      ]
+    },
+    "Mundo_Pacifico": {
+      "sitio": "principal",
+      "reportes": [
+        { "alias": "brutas", "nombre_reporte": "ConvertiaVentasBrutasCall" },
+        { "alias": "gestionventas", "nombre_reporte": "ReportMultiventa" }
+      ]
+    },
+    "DirecTV_pe": {
+      "sitio": "principal",
+      "reportes": [
+        { "alias": "brutas", "nombre_reporte": "ConvertiaVentasBrutasCall" },
+        { "alias": "gestionventas", "nombre_reporte": "ReportDetalleGestionVentas" }
+      ]
+    },
+    "Claro_Cr": {
+      "sitio": "claro",
+      "reportes": [
+        { "alias": "brutas", "nombre_reporte": "ReportConvertiaVentasBrutasCall" }
+      ]
+    }
+  }
+}

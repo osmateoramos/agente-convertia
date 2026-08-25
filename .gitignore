@@ -1,0 +1,22 @@
+# Credenciales -- nunca subir
+convertia.env
+.env
+
+# Datos reales de clientes (reportes descargados/procesados y libros de trabajo)
+*.xlsx
+*.xlsm
+!*.example.xlsx
+Procesados/
+~$*
+
+# Logs y diagnostico de corridas
+run_log_*.txt
+_debug_error_*.png
+
+# Python
+__pycache__/
+*.pyc
+
+# Backups locales
+*backup*.xlsx
+*.tmp.xlsx
