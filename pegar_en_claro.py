@@ -33,7 +33,7 @@ from openpyxl.utils import get_column_letter, column_index_from_string
 from openpyxl.utils.datetime import to_excel
 
 CARPETA = Path(__file__).resolve().parent
-ARCHIVO = CARPETA / "08 Claro CR 23 de Agosto 2026.xlsx"
+ARCHIVO = CARPETA / "Libros de Cuenta" / "08 Claro CR 23 de Agosto 2026.xlsx"
 BRUTAS = CARPETA / "Procesados" / "BRUTAS_Claro_Cr_2026-08-25.xlsx"
 
 MAIN_NS = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"

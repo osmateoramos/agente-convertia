@@ -7,7 +7,13 @@ convertia.env
 *.xlsm
 !*.example.xlsx
 Procesados/
+Libros de Cuenta/
+Legado/
 ~$*
+
+# Comentarios operacionales (analisis comercial real, no es codigo del agente)
+Comentarios/
+*.docx
 
 # Logs y diagnostico de corridas
 run_log_*.txt

@@ -31,7 +31,7 @@ from openpyxl.utils.datetime import to_excel
 import openpyxl
 
 CARPETA = Path(__file__).resolve().parent
-ARCHIVO_CDM = CARPETA / "08_CDM_UNIVERSAL_WOW PERU CPA Agosto 23.xlsx"
+ARCHIVO_CDM = CARPETA / "Libros de Cuenta" / "08_CDM_UNIVERSAL_WOW PERU CPA Agosto 23.xlsx"
 BRUTAS = CARPETA / "Procesados" / "BRUTAS_wowperu_2026-08-25.xlsx"
 GESTION = CARPETA / "Procesados" / "GESTIONVENTAS_wowperu_2026-08-25.xlsx"
 
