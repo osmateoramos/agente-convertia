@@ -1,6 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
-cd /d "C:\Users\dy2059\Mis Archivos\CLAUDE"
+REM PENDIENTE: cuando se renombre la carpeta raiz de CLAUDE a "Agente Convertia", cambiar la linea de abajo
+cd /d "C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo"
 
 set FECHA_INICIO=%~1
 set FECHA_FIN=%~2

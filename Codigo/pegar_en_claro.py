@@ -32,7 +32,8 @@ from openpyxl.formula.translate import Translator
 from openpyxl.utils import get_column_letter, column_index_from_string
 from openpyxl.utils.datetime import to_excel
 
-CARPETA = Path(__file__).resolve().parent
+SCRIPT_DIR = Path(__file__).resolve().parent  # Codigo/
+CARPETA = SCRIPT_DIR.parent  # carpeta del agente -- Libros de Cuenta y Procesados viven aca
 ARCHIVO = CARPETA / "Libros de Cuenta" / "08 Claro CR 23 de Agosto 2026.xlsx"
 BRUTAS = CARPETA / "Procesados" / "BRUTAS_Claro_Cr_2026-08-25.xlsx"
 

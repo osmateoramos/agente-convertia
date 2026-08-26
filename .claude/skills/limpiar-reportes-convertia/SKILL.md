@@ -7,11 +7,11 @@ Corre la limpieza automática de los reportes de Convertia ya descargados.
 
 ## Archivos involucrados
 
-Misma carpeta que `descargar-reportes-convertia`: `C:\Users\dy2059\Mis Archivos\CLAUDE\`
+Mismo sitio que `descargar-reportes-convertia`: script y config en `C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo\`, pero los datos (crudos y `Procesados\`) viven un nivel arriba, en `C:\Users\dy2059\Mis Archivos\CLAUDE\` (el script usa `RAIZ = SCRIPT_DIR.parent` para encontrarlos).
 - Script: `limpiar_reportes_convertia.py`
 - Config (de dónde saca los alias válidos para reconocer qué archivos son reportes): `reportes_config.json` — el mismo que usa el descargador, no hay config propia.
-- Entrada: los `.xlsx` sueltos en esa carpeta cuyo nombre empiece con un alias conocido (`BRUTAS_...`, `GESTIONVENTAS_...`, los que estén definidos en `reportes_config.json`).
-- Salida: una copia limpia de cada uno en la subcarpeta `Procesados\`, con el mismo nombre de archivo. **El crudo original se borra** una vez generado el procesado (con éxito, o si ya existía de antes) — la carpeta principal debe quedar solo con los scripts y `Procesados\`, sin `.xlsx` crudos sueltos. Si un archivo da ERROR al limpiarlo, el crudo correspondiente NO se borra, para poder diagnosticarlo.
+- Entrada: los `.xlsx` sueltos en `RAIZ` (no en `Codigo\`) cuyo nombre empiece con un alias conocido (`BRUTAS_...`, `GESTIONVENTAS_...`, los que estén definidos en `reportes_config.json`).
+- Salida: una copia limpia de cada uno en `RAIZ\Procesados\`, con el mismo nombre de archivo. **El crudo original se borra** una vez generado el procesado (con éxito, o si ya existía de antes) — `RAIZ` debe quedar solo con las subcarpetas (`Procesados\`, `Codigo\`, `Libros de Cuenta\`, etc.), sin `.xlsx` crudos sueltos. Si un archivo da ERROR al limpiarlo, el crudo correspondiente NO se borra, para poder diagnosticarlo.
 
 **Si no encuentras el script en esa ruta, no asumas ni busques por tu cuenta — pregúntale al usuario dónde está.** Esta carpeta ya se movió varias veces (ver la nota equivalente en el skill de descarga).
 
@@ -30,11 +30,11 @@ Importante: esto **no tiene relación con `Plantilla Unificacion.xlsm`** (el Exc
 1. Verifica que `limpiar_reportes_convertia.py` y `reportes_config.json` existan en la carpeta esperada.
 2. Corré el script:
    ```powershell
-   python "C:\Users\dy2059\Mis Archivos\CLAUDE\limpiar_reportes_convertia.py"
+   python "C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo\limpiar_reportes_convertia.py"
    ```
    Si el usuario quiere rehacer archivos que ya se limpiaron antes (por ejemplo, volvió a descargar el mismo día y quiere refrescar el limpio también):
    ```powershell
-   python "C:\Users\dy2059\Mis Archivos\CLAUDE\limpiar_reportes_convertia.py" --forzar
+   python "C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo\limpiar_reportes_convertia.py" --forzar
    ```
 3. Si ya existe el limpio correspondiente (mismo nombre en `Procesados\`) y no se pasó `--forzar`, el script lo salta solo — repórtaselo al usuario como "ya estaba limpio", no como error.
 4. Lee el output y repórtale al usuario, por archivo: fila donde se detectó el encabezado, cantidad de filas de datos, columnas de fecha limpiadas, y cualquier **AVISO** (cuenta no coincide, total de resultados no coincide, valores de fecha no interpretables). Los avisos no son errores fatales, pero hay que señalarlos — pueden indicar un reporte con un formato distinto al esperado.

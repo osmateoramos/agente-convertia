@@ -7,13 +7,13 @@ Ejecuta la descarga automática de reportes de Convertia para el usuario.
 
 ## Archivos involucrados
 
-Ubicación esperada (todo junto en una sola carpeta): `C:\Users\dy2059\Mis Archivos\CLAUDE\`
+Ubicación esperada: `C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo\` (el código y la config viven en la subcarpeta `Codigo\`; `Procesados\`, `Libros de Cuenta\`, `Legado\` y `Comentarios\` quedan al mismo nivel que `Codigo\`, no adentro).
 - Script: `descargar_reportes_convertia.py`
 - Config (cuentas, sitios y reportes): `reportes_config.json`
 - Credenciales: `convertia.env` (nunca leer ni mostrar su contenido)
-- Los Excel descargados se guardan en esa misma carpeta (el script usa la carpeta donde él mismo vive, `DOWNLOAD_DIR = SCRIPT_DIR`, así que si el usuario mueve la carpeta completa, sigue funcionando sin tocar código)
+- Los Excel descargados se guardan un nivel arriba de `Codigo\` (el script usa `DOWNLOAD_DIR = RAIZ`, la carpeta padre, no la carpeta del script), para no mezclar datos con código.
 
-**Si no encuentras alguno de estos archivos en esa ruta, no asumas ni busques por tu cuenta en múltiples carpetas — pregúntale directamente al usuario dónde los movió.** Ya ha reorganizado estos archivos varias veces (Descargas → `Documents\CLAUDE` → `OneDrive\Documentos\CLAUDE` → brevemente `OneDrive - Universidad Santo Tomás\Documentos\CLAUDE` → `C:\Users\dy2059\CLAUDE` → `C:\Users\dy2059\Mis Archivos\CLAUDE`, esta última el 24/08/2026, para tener las tres carpetas del usuario (CLAUDE, ANALISIS COSTOS NOMINA, MATERIAL UNIVERSIDAD) juntas en un solo contenedor local prolijo, fuera de cualquier carpeta redirigida a OneDrive (Documentos y Escritorio están redirigidos en esta PC; Descargas no). Así que la ruta de arriba es solo la última conocida, no una garantía.
+**Si no encuentras alguno de estos archivos en esa ruta, no asumas ni busques por tu cuenta en múltiples carpetas — pregúntale directamente al usuario dónde los movió.** Ya ha reorganizado estos archivos varias veces (Descargas → `Documents\CLAUDE` → `OneDrive\Documentos\CLAUDE` → brevemente `OneDrive - Universidad Santo Tomás\Documentos\CLAUDE` → `C:\Users\dy2059\CLAUDE` → `C:\Users\dy2059\Mis Archivos\CLAUDE` → el 25/08/2026 se separó el código en `Codigo\` dentro de esa misma carpeta. **Pendiente**: el usuario quiere renombrar la carpeta raíz de `CLAUDE` a `Agente Convertia` (no se pudo hacer en el momento porque VS Code la tenía abierta como workspace) — si la encuentras con ese nombre nuevo, es la misma carpeta, solo actualiza esta nota. Así que la ruta de arriba es solo la última conocida, no una garantía.
 
 ## Pasos
 
@@ -23,16 +23,16 @@ Ubicación esperada (todo junto en una sola carpeta): `C:\Users\dy2059\Mis Archi
 4. Corre el script con salida en vivo y en segundo plano (puede tardar varios minutos: cada reporte puede tomar hasta 5 minutos en generarse, y hay hasta 3 reportes x N cuentas). Ejemplos:
    ```powershell
    # Fechas por defecto para todas las cuentas
-   python -u "C:\Users\dy2059\Mis Archivos\CLAUDE\descargar_reportes_convertia.py"
+   python -u "C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo\descargar_reportes_convertia.py"
 
    # Fechas explícitas para todas las cuentas
-   python -u "C:\Users\dy2059\Mis Archivos\CLAUDE\descargar_reportes_convertia.py" --fecha-inicio 2026-06-01 --fecha-fin 2026-08-16
+   python -u "C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo\descargar_reportes_convertia.py" --fecha-inicio 2026-06-01 --fecha-fin 2026-08-16
 
    # Fechas explícitas + una cuenta con rango distinto
-   python -u "C:\Users\dy2059\Mis Archivos\CLAUDE\descargar_reportes_convertia.py" --fecha-inicio 2026-06-01 --fecha-fin 2026-08-16 --fechas-cuenta "{\"Claro_Cr\": [\"2026-07-01\", \"2026-08-16\"]}"
+   python -u "C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo\descargar_reportes_convertia.py" --fecha-inicio 2026-06-01 --fecha-fin 2026-08-16 --fechas-cuenta "{\"Claro_Cr\": [\"2026-07-01\", \"2026-08-16\"]}"
 
    # Prueba rápida (mes presente, una cuenta por sitio)
-   python -u "C:\Users\dy2059\Mis Archivos\CLAUDE\descargar_reportes_convertia.py" --modo-prueba
+   python -u "C:\Users\dy2059\Mis Archivos\CLAUDE\Codigo\descargar_reportes_convertia.py" --modo-prueba
    ```
    También existe `run_convertia.bat` en la misma carpeta (`run_convertia.bat [fecha-inicio] [fecha-fin] [forzar]`) para que el usuario lo corra por su cuenta sin depender de ti; hace lo mismo que el comando de arriba y además loguea a `run_log_<timestamp>.txt`.
 5. El script se puede correr de nuevo sin miedo a duplicar trabajo: si ya existe el `.xlsx` de hoy para una cuenta/alias, lo salta automáticamente (así una corrida que falló a mitad de camino se completa sola en el segundo intento, sin re-descargar lo que ya estaba bien). Si el usuario quiere forzar la re-descarga de algo que ya existe, agrega `--forzar`.

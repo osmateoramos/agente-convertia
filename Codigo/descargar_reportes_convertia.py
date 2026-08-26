@@ -52,7 +52,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 from playwright.sync_api import Page, TimeoutError as PlaywrightTimeoutError, sync_playwright
 
-SCRIPT_DIR = Path(__file__).resolve().parent
+SCRIPT_DIR = Path(__file__).resolve().parent  # Codigo/ -- config y credenciales
+RAIZ = SCRIPT_DIR.parent  # carpeta del agente -- donde viven los datos (crudos, Procesados)
 load_dotenv(SCRIPT_DIR / "convertia.env")
 
 CONVERTIA_USER = os.environ.get("CONVERTIA_USER")
@@ -64,7 +65,7 @@ if not CONVERTIA_USER or not CONVERTIA_PASS:
     )
 
 CONFIG_PATH = SCRIPT_DIR / "reportes_config.json"
-DOWNLOAD_DIR = SCRIPT_DIR
+DOWNLOAD_DIR = RAIZ
 HEADLESS = False  # pon False si quieres ver el navegador mientras corre
 
 REPORT_LOAD_TIMEOUT_MS = 300_000  # 5 minutos (los reportes "brutas" con el rango completo de 2 meses a veces tardan mas de 2.5 min)

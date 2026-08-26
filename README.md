@@ -41,22 +41,32 @@ Las fechas y la cuenta las elegís vos en el momento; el agente no las tiene fij
 ## Estructura de carpetas
 
 ```
-descargar_reportes_convertia.py   -- descarga (Playwright)
-limpiar_reportes_convertia.py     -- limpieza determinista (openpyxl)
-pegar_en_cdm.py / pegar_en_claro.py
-                                   -- consolidan lo limpio en el libro de seguimiento
-                                      de WOW Perú/Mundo Pacífico y de Claro CR
-                                      (edición XML quirúrgica, sin recargar el libro
-                                      completo -- ver nota abajo)
-reportes_config.json              -- sitios, cuentas y reportes (declarativo)
-.claude/skills/                   -- las instrucciones de los 3 skills
+Codigo/                            -- todo el codigo y su configuracion
+  descargar_reportes_convertia.py    -- descarga (Playwright)
+  limpiar_reportes_convertia.py      -- limpieza determinista (openpyxl)
+  pegar_en_cdm.py / pegar_en_claro.py
+                                      -- consolidan lo limpio en el libro de
+                                         seguimiento de WOW Perú/Mundo Pacífico y de
+                                         Claro CR (edición XML quirúrgica, sin
+                                         recargar el libro completo -- ver nota abajo)
+  reportes_config.json               -- sitios, cuentas y reportes (declarativo)
+  convertia.env                      -- credenciales (no versionado)
+  run_convertia.bat
 
-Procesados/                       -- reportes ya descargados y limpios (no versionado)
-Libros de Cuenta/                 -- el libro de seguimiento real de cada cuenta,
-                                      con datos comerciales (no versionado)
-Comentarios/                      -- comentarios operacionales en Word (no versionado)
-Legado/                           -- Plantilla Unificacion.xlsm, ya no se usa
+.claude/skills/                    -- las instrucciones de los 3 skills
+
+Procesados/                        -- reportes ya descargados y limpios (no versionado)
+Libros de Cuenta/                  -- el libro de seguimiento real de cada cuenta,
+                                       con datos comerciales (no versionado)
+Comentarios/                       -- comentarios operacionales en Word (no versionado)
+Legado/                            -- Plantilla Unificacion.xlsm, ya no se usa
 ```
+
+El código vive separado de los datos a propósito: `Codigo/` es lo único que tiene
+sentido versionar, todo lo demás lo genera o lo consume el agente en cada corrida.
+Los scripts saben encontrar los datos un nivel arriba de sí mismos (`RAIZ =
+SCRIPT_DIR.parent`), así que la carpeta completa se puede mover o renombrar sin tocar
+código, mientras `Codigo/` se mueva junto con el resto.
 
 ### Sobre `pegar_en_cdm.py` / `pegar_en_claro.py`
 
@@ -72,16 +82,19 @@ la columna equivocada sin que se note.
 ## Setup
 
 ```powershell
+cd Codigo
 pip install -r requirements.txt
 playwright install chrome
 ```
 
-Copiá `.env.example` a `convertia.env` (junto al script) con tus credenciales de
+Copiá `Codigo/.env.example` a `Codigo/convertia.env` con tus credenciales de
 Convertia. `convertia.env` nunca se versiona.
 
 ## Uso directo (sin pedírselo a Claude)
 
 ```powershell
+cd Codigo
+
 # Descargar con el rango de fechas por defecto
 python descargar_reportes_convertia.py
 

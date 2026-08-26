@@ -30,7 +30,8 @@ from openpyxl.utils import get_column_letter, column_index_from_string
 from openpyxl.utils.datetime import to_excel
 import openpyxl
 
-CARPETA = Path(__file__).resolve().parent
+SCRIPT_DIR = Path(__file__).resolve().parent  # Codigo/
+CARPETA = SCRIPT_DIR.parent  # carpeta del agente -- Libros de Cuenta y Procesados viven aca
 ARCHIVO_CDM = CARPETA / "Libros de Cuenta" / "08_CDM_UNIVERSAL_WOW PERU CPA Agosto 23.xlsx"
 BRUTAS = CARPETA / "Procesados" / "BRUTAS_wowperu_2026-08-25.xlsx"
 GESTION = CARPETA / "Procesados" / "GESTIONVENTAS_wowperu_2026-08-25.xlsx"

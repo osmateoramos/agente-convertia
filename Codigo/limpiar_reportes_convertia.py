@@ -35,9 +35,10 @@ from pathlib import Path
 
 import openpyxl
 
-SCRIPT_DIR = Path(__file__).resolve().parent
+SCRIPT_DIR = Path(__file__).resolve().parent  # Codigo/ -- config
+RAIZ = SCRIPT_DIR.parent  # carpeta del agente -- crudos y Procesados viven aca
 CONFIG_PATH = SCRIPT_DIR / "reportes_config.json"
-CARPETA_PROCESADOS = SCRIPT_DIR / "Procesados"
+CARPETA_PROCESADOS = RAIZ / "Procesados"
 
 MAX_FILAS_GUIA = 30  # si no aparece la fila separadora en blanco dentro de este margen, se considera formato inesperado
 FORMATOS_FECHA_TEXTO = ("%Y-%m-%d %H:%M:%S", "%Y-%m-%d", "%d/%m/%Y %H:%M:%S", "%d/%m/%Y")
@@ -191,10 +192,10 @@ def main() -> None:
     alias_validos = cargar_alias_validos()
 
     candidatos = sorted(
-        p for p in SCRIPT_DIR.glob("*.xlsx") if es_archivo_de_reporte(p.name, alias_validos)
+        p for p in RAIZ.glob("*.xlsx") if es_archivo_de_reporte(p.name, alias_validos)
     )
     if not candidatos:
-        print(f"No se encontro ningun .xlsx con alias conocido ({sorted(alias_validos)}) en {SCRIPT_DIR}.", flush=True)
+        print(f"No se encontro ningun .xlsx con alias conocido ({sorted(alias_validos)}) en {RAIZ}.", flush=True)
         return
 
     for ruta_entrada in candidatos:
